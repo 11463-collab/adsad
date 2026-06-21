@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Favoritku ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff5f5;
+            background-image: radial-gradient(#ffdfdf 1px, transparent 1px);
+            background-size: 20px 20px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #564441;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Dekorasi Selotip/Washi Tape di atas kartu */
+        .washi-tape {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 120px;
+            height: 30px;
+            background: rgba(255, 182, 193, 0.7);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .card-container {
+            position: relative;
+            width: 90%;
+            max-width: 380px;
+        }
+
+        .aesthetic-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 30px rgba(163, 122, 116, 0.15);
+            text-align: center;
+            border: 4px solid #fffdfa;
+        }
+
+        .avatar-area {
+            font-size: 50px;
+            margin-bottom: 15px;
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: #de7a7a;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #6c5a57;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: #ffe3e3;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #de7a7a;
+        }
+
+        /* Tombol Interaktif */
+        .cute-btn {
+            background: #ffabab;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 171, 171, 0.4);
+            transition: all 0.2s ease;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .cute-btn:hover {
+            background: #ff9494;
+            transform: scale(1.03);
+        }
+
+        .cute-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Efek Hati Berjatuhan */
+        .heart-pop {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 1.5s ease-out forwards;
+            font-size: 24px;
+            z-index: 100;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="washi-tape"></div>
+        <div class="aesthetic-card">
+            <div class="avatar-area">🧸</div>
+            <h2> can i tell you something? </h2>
+            
+            <p>Haii Khusnaakuuu yanngg luttuuu, btw hari ini kamu <span class="highlight">gemesin banget</span>, deh. Gak tahu kenapa, pokoknya kangennya udah overload!</p>
+            
+            <p>Makasih ya udah jadi cewee terbaikku, udah sabar walau sifatku random, dan selalu bisa bikin aku senyum-senyum sendiri kayak orang aneh.</p>
+            
+            <p>Kalau kamu lagi capek atau pusing hari ini, coba klik tombol di bawah ini. Aku kirim pelukan virtual yang banyak buat kamu!</p>
+            
+            <button class="cute-btn" onclick="popHearts(event)">Klik kalooo kamuww kangeenn🧸✨</button>
+        </div>
+    </div>
+
+    <script>
+        function popHearts(e) {
+            const emojis = ['💖', '🌸', '✨', '🧸', '🎀', '🥰'];
+            
+            // Membuat beberapa elemen hati/emoji sekaligus saat diklik
+            for (let i = 0; i < 8; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-pop');
+                
+                // Pilih emoji acak
+                heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                // Atur posisi acak di sekitar tombol
+                const rect = e.target.getBoundingClientRect();
+                const randomX = rect.left + Math.random() * rect.width - 20;
+                const randomY = rect.top + Math.random() * rect.height - 20;
+                
+                heart.style.left = randomX + 'px';
+                heart.style.top = randomY + 'px';
+                
+                // Variasi arah terbang acak sedikit ke kiri/kanan
+                const offsetLeft = (Math.random() - 0.5) * 60;
+                heart.style.setProperty('--offset-left', offsetLeft + 'px');
+                
+                document.body.appendChild(heart);
+                
+                // Hapus elemen setelah animasi selesai
+                setTimeout(() => {
+                    heart.remove();
+                }, 1500);
+            }
+        }
+    </script>
+</body>
+</html>
